@@ -21,7 +21,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
+    "docker-build": "docker build -t kindle .",
+    "docker-run": "docker run -d --name kindle -p 5000:5000 kindle",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

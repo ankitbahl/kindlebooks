@@ -6,8 +6,26 @@ import {queryLibgen, downloadFile, sendMobiToKindle, downloadConvertFile} from "
 import fs from "fs";
 import { createClient } from 'redis';
 import {authenticate, login} from "./src/utils/authHelper.js";
+import {lookup} from "dns";
 
-const redisClient = createClient();
+let options = {};
+
+let isDocker = await new Promise(resolve =>
+  lookup('host.docker.internal', (err, res) => {
+    if (err) {
+      resolve(false);
+    } else if (res) {
+      resolve(true);
+    } else {
+      resolve(false);
+    }
+  })
+);
+
+if (isDocker) {
+  options = {socket: {host: 'host.docker.internal' }};
+}
+const redisClient = createClient(options);
 redisClient.on('error', (err) => console.log('Redis Client Error', err));
 await redisClient.connect();
 

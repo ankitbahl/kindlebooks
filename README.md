@@ -14,5 +14,5 @@ Prequisites:
 3. `npm run build && node server.js` 
 
 To run in docker:
-1. `docker build -t kindle`
-2. `docker run -d kindle`
+1. `docker build -t kindle .`
+2. `docker run -d --name kindle -p 5000:5000 kindle`
