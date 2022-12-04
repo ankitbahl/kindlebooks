@@ -12,6 +12,9 @@ export default function useBookList() {
   const getBookList = (searchTerm) => {
     axios.get(`/book-list?searchTerm=${encodeURI(searchTerm)}`, {headers: {auth: getAuthCookie()}})
       .then(res => {
+        if (res.data.data.length === 0) {
+          alert('No results!');
+        }
         setBookList(res.data.data);
       })
       .catch(e => console.error(e));

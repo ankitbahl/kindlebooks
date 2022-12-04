@@ -59,6 +59,7 @@ export async function queryLibgen(search, page = 1, sort = 'title', sortDirectio
   } catch(e) {
     console.error(e);
     console.log(document.outerHTML);
+    return {data: [], pages: 0}
   }
 }
 
