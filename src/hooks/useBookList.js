@@ -32,7 +32,7 @@ export default function useBookList() {
     const url = bookList[row].files[selectedFileIndexes[row]].links[0];
     const filename = bookList[row].title;
     const extension = bookList[row].files[selectedFileIndexes[row]].type.toLowerCase();
-    const file = `${filename}.${extension}`
+    const file = `${filename}.${extension}`;
     axios.get(`${serverPath}?bookUrl=${encodeURI(url)}`, {responseType: 'blob', headers: {auth: getAuthCookie()}})
       .then(res => {
         const url = window.URL.createObjectURL(new Blob([res.data]));
@@ -45,7 +45,12 @@ export default function useBookList() {
       .catch(e => console.error(e));
   }
   const convertEmailBook = (row) => {
-
+    const url = bookList[row].files[selectedFileIndexes[row]].links[0];
+    axios.get(`/send-to-kindle?bookUrl=${encodeURI(url)}`, {responseType: 'blob', headers: {auth: getAuthCookie()}})
+      .then(res => {
+        console.log(res);
+      })
+      .catch(e => console.error(e));
   }
 
 
@@ -57,5 +62,5 @@ export default function useBookList() {
 
   return [{ bookList, getBookList },
           { selectedFileIndexes, setSelectedFile },
-          { downloadBook }];
+          { downloadBook, downloadConvertBook, convertEmailBook }];
 }

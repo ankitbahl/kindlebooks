@@ -33,7 +33,6 @@ export async function login(username, password, redisClient) {
 
 export async function authenticate(req, res, redisClient) {
   const token = req.header('auth');
-  console.log(token);
   const containsToken = await new Promise(resolve => {
     redisClient.exists(token).then(val => {
       if (val) {

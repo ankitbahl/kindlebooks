@@ -89,7 +89,6 @@ export async function downloadFile(url) {
 export async function downloadConvertFile(bookUrl) {
   const filename = await downloadFile(bookUrl);
   return await convertToMobi(filename);
-
 }
 
 export async function sendMobiToKindle(filepath, email) {

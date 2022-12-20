@@ -53,7 +53,7 @@ const ListItem = styled.div`
 const BookList = () => {
   const [{ bookList, getBookList },
          { setSelectedFile },
-         { downloadBook }] = useBookList();
+         { downloadBook, downloadConvertBook, convertEmailBook }] = useBookList();
   const [searchText, setSearchText] = useState('');
 
   // if (!localStorage.getItem('loginUser') || !localStorage.getItem('loginPass')) {
@@ -87,8 +87,8 @@ const BookList = () => {
               })}
             </select></div>
             <div><button onClick={() => downloadBook(index)}>Download</button></div>
-            <div><button>Convert and Download</button></div>
-            <div><button>Convert and Send</button></div>
+            <div><button onClick={() => downloadConvertBook(index)}>Convert and Download</button></div>
+            <div><button onClick={() => convertEmailBook(index)}>Convert and Send</button></div>
           </ListItem>);
         })}
       </List>

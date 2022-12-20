@@ -23,7 +23,7 @@ let isDocker = await new Promise(resolve =>
 );
 
 if (isDocker) {
-  options = {socket: {host: 'host.docker.internal' }};
+  options = {socket: {host: 'host.docker.internal', port: 6378 }};
 }
 const redisClient = createClient(options);
 redisClient.on('error', (err) => console.log('Redis Client Error', err));
@@ -57,7 +57,6 @@ app.get('/download-book', async (req, res) => {
 
   const bookUrl = req.query.bookUrl;
   const filename = await downloadFile(bookUrl);
-  console.log(filename);
   res.download(`./temp/${filename}`, () => {
     fs.unlinkSync(`./temp/${filename}`);
   });
