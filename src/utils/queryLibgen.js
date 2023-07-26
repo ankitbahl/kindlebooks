@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { JSDOM } from 'jsdom';
 import fs from 'fs';
+import emailFile from "./mail.js";
 
 const baseUrl = "https://libgen.is/fiction";
 
@@ -91,8 +92,8 @@ export async function downloadConvertFile(bookUrl) {
   return await convertToMobi(filename);
 }
 
-export async function sendMobiToKindle(filepath, email) {
-  const mobiPath = await convertToMobi(filepath);
+export async function sendToKindle(filename, email) {
+  await emailFile(filename, email);
 }
 
 async function emailToKindle(mobiPath, email) {

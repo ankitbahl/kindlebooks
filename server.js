@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import {fileURLToPath} from 'url';
-import {queryLibgen, downloadFile, sendMobiToKindle, downloadConvertFile} from "./src/utils/queryLibgen.js";
+import {queryLibgen, downloadFile, sendToKindle, downloadConvertFile} from "./src/utils/queryLibgen.js";
 import fs from "fs";
 import { createClient } from 'redis';
 import {authenticate, login} from "./src/utils/authHelper.js";
@@ -81,10 +81,19 @@ app.get('/send-to-kindle', async (req, res) => {
   }
 
   const bookUrl = req.query.bookUrl;
-  const email = req.query.email;
+  const selectedKindle = req.query.selectedKindle;
+  let email = '';
+  switch (selectedKindle) {
+    case 'ankit':
+      email = 'aNkit2-bahl@kindle.com';
+      break;
+    case 'ankita':
+      email = 'baruahan07_1LINrb@kindle.com';
+      break;
+  }
   const filename = await downloadFile(bookUrl);
   try {
-    await sendMobiToKindle(filename, email);
+    await sendToKindle(filename, email);
   } catch (e) {
     console.error(e);
     res.send(400);
