@@ -140,6 +140,9 @@ const BookList = () => {
                 <option value="ankita">
                   Ankita's Kindle
                 </option>
+		<option value="anna">
+		  Anna's Kindle
+		</option>
               </select></div>
               <div>{sendButton(index)}</div>
             </ListItem>);

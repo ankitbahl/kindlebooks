@@ -90,6 +90,9 @@ app.get('/send-to-kindle', async (req, res) => {
     case 'ankita':
       email = 'baruahan07_1LINrb@kindle.com';
       break;
+    case 'anna':
+      email = 'annabaruah_123@kindle.com';
+      break;
   }
   const filename = await downloadFile(bookUrl);
   try {
